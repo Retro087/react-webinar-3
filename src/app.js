@@ -10,6 +10,20 @@ import "./styles.css";
 function App({ store }) {
   const list = store.getState().list;
 
+  function pluralize(number) {
+    let words = ["раз", "раза", "раз"];
+    if (number % 10 === 1 && number % 100 !== 11) {
+      return words[0];
+    } else if (
+      number % 10 >= 2 &&
+      number % 10 <= 4 &&
+      (number % 100 < 10 || number % 100 >= 20)
+    ) {
+      return words[1];
+    } else {
+      return words[2];
+    }
+  }
   return (
     <div className="App">
       <div className="App-head">
@@ -30,7 +44,9 @@ function App({ store }) {
                 <div className="Item-title">
                   {item.title}
                   {item.selectedNum
-                    ? ` | Выделяли ${item.selectedNum} раз`
+                    ? ` | Выделяли ${item.selectedNum} ${pluralize(
+                        item.selectedNum
+                      )}`
                     : ""}
                 </div>
                 <div className="Item-actions">
