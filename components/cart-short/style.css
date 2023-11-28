@@ -1,0 +1,8 @@
+.CartShort{
+    display: flex;
+}
+
+.CartShort-text{
+    padding: 0 10px;
+
+}
