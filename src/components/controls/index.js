@@ -1,21 +1,23 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import './style.css';
+import CartShort from "../cart-short";
 
-function Controls({onAdd}) {
+function Controls(props) {
   return (
     <div className='Controls'>
-      <button onClick={() => onAdd()}>Добавить</button>
+      <CartShort openModal={props.openModal} cart={props.cart}/>
     </div>
   )
 }
 
 Controls.propTypes = {
-  onAdd: PropTypes.func
+  openModal: PropTypes.func,
+  cart: PropTypes.array
 };
 
 Controls.defaultProps = {
-  onAdd: () => {}
+  openModal: () => {}
 }
 
 export default React.memo(Controls);

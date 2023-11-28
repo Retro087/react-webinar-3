@@ -18,8 +18,19 @@
   padding: 20px 10px;
 }
 
+.Item-price {
+  padding: 20px 10px;
+  white-space: nowrap;
+  
+}
+
 .Item-actions {
   display: flex;
   justify-content: flex-end;
   padding: 20px 20px 20px 10px;
+}
+
+.Item-quantity{
+  padding: 20px 10px 20px 50px;
+  white-space: nowrap;
 }

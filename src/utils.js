@@ -50,3 +50,11 @@ export const generateCode1 = (function (start = 0) {
 export function generateCode2() {
   return generateCode2.value ? ++generateCode2.value : generateCode2.value = 1;
 }
+
+export function getSum(cart){
+  let sum = 0
+  cart.forEach(element => {
+    sum += element.price * element.quantity
+  });
+  return sum
+}
