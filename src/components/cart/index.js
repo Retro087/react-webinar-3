@@ -5,6 +5,7 @@ import Head from "../head"
 import List from "../list"
 import { getSum } from "../../utils"
 import Controls from "../controls"
+import PropTypes from "prop-types";
 
 function Cart(props){
     return(

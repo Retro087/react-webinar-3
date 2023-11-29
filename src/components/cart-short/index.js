@@ -1,6 +1,7 @@
 import React from "react";
 import './style.css'
 import { getSum, plural } from "../../utils";
+import PropTypes from "prop-types";
 
 function CartShort(props) {
     return(
