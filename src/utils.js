@@ -58,3 +58,10 @@ export function getSum(cart){
   });
   return sum
 }
+
+export function formatPrice(value, locale = 'ru-RU', currency = 'RUB') {
+  return new Intl.NumberFormat(
+    locale,
+    {style: 'currency', currency: currency, trailingZeroDisplay: 'stripIfInteger'}
+    ).format(value);
+}

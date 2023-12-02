@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import PropTypes from "prop-types";
-import {plural} from "../../utils";
+import {formatPrice, plural} from "../../utils";
 import './style.css';
 
 function Item(props) {
@@ -23,7 +23,7 @@ function Item(props) {
         {props.item.title}
       </div>
       <div className="Item-price">
-        {`${props.item.price} ₽`}
+        {`${formatPrice(props.item.price)}`}
       </div>
       {props.item.quantity 
       ? <div className='Item-quantity'>
@@ -54,7 +54,7 @@ Item.propTypes = {
     quantity: PropTypes.number
   }).isRequired,
   onAddItem: PropTypes.func,
-  deleteItem: PropTypes.func
+  deleteItem: PropTypes.func,
 };
 
 Item.defaultProps = {
