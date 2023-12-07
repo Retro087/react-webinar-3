@@ -1,6 +1,8 @@
 import React from "react";
 import { useEffect } from "react";
 import './style.css'
+import PropTypes from "prop-types";
+
 function ProductItem(props){
 
     useEffect(() => {
@@ -19,4 +21,14 @@ function ProductItem(props){
     )
 }
 
+ProductItem.propTypes = {
+    text: PropTypes.string,
+    madeIn: PropTypes.string,
+    category: PropTypes.string,
+    edition: PropTypes.number,
+    price: PropTypes.number,
+    id: PropTypes.number,
+    closeModalBasket: PropTypes.func,
+    addToBasket: PropTypes.func
+}
 export default React.memo(ProductItem)
