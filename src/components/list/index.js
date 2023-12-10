@@ -2,8 +2,12 @@ import {memo} from "react";
 import PropTypes from 'prop-types';
 import Item from "../item";
 import './style.css';
+import Preloader from "../assets/preloader";
 
-function List({list, renderItem}) {
+function List({list, renderItem, isLoading, lang}) {
+  if(isLoading){
+    return <Preloader lang={lang}/>
+  }
   return (
     <div className='List'>{
       list.map(item =>

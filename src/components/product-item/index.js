@@ -2,33 +2,36 @@ import React from "react";
 import { useEffect } from "react";
 import './style.css'
 import PropTypes from "prop-types";
+import Preloader from "../assets/preloader";
+import { translater } from "../../utils";
 
 function ProductItem(props){
-
+    
     useEffect(() => {
         props.closeModalBasket()
-    }, [])
+    }, [props.productData._id])
+    
+    if(!props.productData.description || props.isLoading){
+        return <Preloader lang={props.lang}/>
+    }
 
     return(
-        <div className="ProductItem">
-            <p>{props.text}</p>
-            <p>Страна производитель: <b>{props.madeIn}</b></p>
-            <p>Категория: <b>{props.category}</b></p>
-            <p>Год выпуска: <b>{props.edition}</b></p>
-            <p className="price">Цена: <b>{props.price} ₽</b></p>
-            <button onClick={() => props.addToBasket(props.id)}>Добавить</button>
+        <div className="ProductItem">   
+            <p>{props.productData.description}</p>
+            <p>{translater('Страна производитель', props.lang)}: <b>{props.productData.madeIn.title}</b></p>
+            <p>{translater('Категория', props.lang)}: <b>{props.productData.category.title}</b></p>
+            <p>{translater('Год выпуска', props.lang)}: <b>{props.productData.edition}</b></p>
+            <p className="price">{translater('Цена', props.lang)}: <b>{props.productData.price} ₽</b></p>
+            <button onClick={() => props.addToBasket(props.productData._id)}>{translater('Добавить', props.lang)}</button>
         </div>
-    )
+    )   
+    
 }
 
 ProductItem.propTypes = {
-    text: PropTypes.string,
-    madeIn: PropTypes.string,
-    category: PropTypes.string,
-    edition: PropTypes.number,
-    price: PropTypes.number,
-    id: PropTypes.number,
+    productData: PropTypes.object,
     closeModalBasket: PropTypes.func,
-    addToBasket: PropTypes.func
+    addToBasket: PropTypes.func,
+    lang: PropTypes.string
 }
 export default React.memo(ProductItem)

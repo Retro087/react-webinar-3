@@ -7,6 +7,8 @@ import List from "../../components/list";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import Pagination from '../../components/pagination';
+import Menu from '../../components/menu';
+import AlignContent from '../../components/align-content';
 
 function Main() {
 
@@ -16,38 +18,42 @@ function Main() {
     list: state.catalog.list,
     amount: state.basket.amount,
     sum: state.basket.sum,
-    limit: state.pagination.limit,
-    currentPage: state.pagination.currentPage,
+    limit: state.catalog.limit,
+    currentPage: state.catalog.currentPage,
     totalPages: state.catalog.totalPages,
-    pages: state.pagination.pages
+    isLoading: state.catalog.isLoading,
+    lang: state.lang.lang
   }));
-
+  
   useEffect(() => {
       store.actions.catalog.load(select.limit, select.currentPage);
   }, [select.currentPage, select.limit]);
-
+  
   const callbacks = {
     // Добавление в корзину
     addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store]),
     // Открытие модалки корзины
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
-    setCurrentPage: useCallback((currentPage) => store.actions.pagination.setCurrentPage(currentPage), [store]),
-    loadPages: useCallback((currentPage, totalPages) => store.actions.pagination.loadPages(currentPage, totalPages), [store])
+    load: useCallback((limit, currentPage) => store.actions.catalog.load(limit, currentPage), [store]),
+    translate: useCallback(lang => store.actions.lang.changeLang(lang), [store])
   }
-
+  
   const renders = {
     item: useCallback((item) => {
-      return <Item item={item} onAdd={callbacks.addToBasket}/>
-    }, [callbacks.addToBasket]),
+      return <Item lang={select.lang} item={item} onAdd={callbacks.addToBasket}/>
+    }, [callbacks.addToBasket, select.lang]),
   };
 
   return (
     <PageLayout>
-      <Head title='Магазин'/>
-      <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
-                  sum={select.sum}/>
-      <List list={select.list} renderItem={renders.item}/>
-      <Pagination totalPages={select.totalPages} currentPage={select.currentPage} limit={select.limit} pages={select.pages} loadPages={callbacks.loadPages} setCurrentPage={callbacks.setCurrentPage}/>
+      <Head lang={select.lang} translate={callbacks.translate} title='Магазин'/>
+      <AlignContent>
+        <Menu lang={select.lang}/>
+        <BasketTool lang={select.lang} onOpen={callbacks.openModalBasket} amount={select.amount}
+                    sum={select.sum}/>
+      </AlignContent>
+      <List lang={select.lang} isLoading={select.isLoading} list={select.list} renderItem={renders.item}/>
+      <Pagination limit={select.limit} load={callbacks.load} totalPages={select.totalPages} currentPage={select.currentPage} />
     </PageLayout>
 
   );

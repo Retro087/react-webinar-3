@@ -1,3 +1,4 @@
+import en from './lang-list/en.json'
 /**
  * Плюрализация
  * Возвращает вариант с учётом правил множественного числа под указанную локаль
@@ -36,4 +37,8 @@ export function numberFormat(value, locale = 'ru-RU', options = {}) {
 
 export function getTotalPages(limit, totalItems){
   return Math.ceil(totalItems / limit)
+}
+
+export function translater(word, lang){
+  return lang === 'ru' ? word : en[word] ? en[word] : word
 }
