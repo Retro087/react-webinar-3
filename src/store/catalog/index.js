@@ -19,6 +19,7 @@ class Catalog extends StoreModule {
   }
 
   async load(limit, currentPage) {
+    debugger
     this.setState({
       ...this.getState(),
       isLoading: true

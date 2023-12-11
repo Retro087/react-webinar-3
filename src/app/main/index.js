@@ -27,7 +27,7 @@ function Main() {
   
   useEffect(() => {
       store.actions.catalog.load(select.limit, select.currentPage);
-  }, [select.currentPage, select.limit]);
+  }, []);
   
   const callbacks = {
     // Добавление в корзину
@@ -53,7 +53,7 @@ function Main() {
                     sum={select.sum}/>
       </AlignContent>
       <List lang={select.lang} isLoading={select.isLoading} list={select.list} renderItem={renders.item}/>
-      <Pagination limit={select.limit} load={callbacks.load} totalPages={select.totalPages} currentPage={select.currentPage} />
+      <Pagination load={callbacks.load} limit={select.limit} totalPages={select.totalPages} currentPage={select.currentPage} />
     </PageLayout>
 
   );
