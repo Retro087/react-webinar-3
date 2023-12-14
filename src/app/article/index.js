@@ -10,6 +10,7 @@ import Navigation from "../../containers/navigation";
 import Spinner from "../../components/spinner";
 import ArticleCard from "../../components/article-card";
 import LocaleSelect from "../../containers/locale-select";
+import UserShort from '../../components/user-short';
 
 /**
  * Страница товара с первичной загрузкой товара по id из url адреса
@@ -22,22 +23,28 @@ function Article() {
 
   useInit(() => {
     store.actions.article.load(params.id);
+    store.actions.login.checkAuth();
   }, [params.id]);
 
   const select = useSelector(state => ({
     article: state.article.data,
     waiting: state.article.waiting,
+    name: state.login.name,
+    isAuth: state.login.isAuth,
   }));
+
 
   const {t} = useTranslate();
 
   const callbacks = {
     // Добавление в корзину
     addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store]),
+    logout: useCallback(() => store.actions.login.logout(), [store])
   }
 
   return (
     <PageLayout>
+      <UserShort isAuth={select.isAuth} logout={callbacks.logout} name={select.name}/>
       <Head title={select.article.title}>
         <LocaleSelect/>
       </Head>

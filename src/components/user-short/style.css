@@ -1,0 +1,12 @@
+.btn{
+  margin-left: 20px;
+
+}
+
+.UserShort{
+  height: 40px;
+  line-height: 40px;
+  text-align: end;
+  vertical-align: middle;
+  padding: 0 20px;
+}

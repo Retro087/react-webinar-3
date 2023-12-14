@@ -1,0 +1,17 @@
+.LoginCard{
+    padding: 0 20px;
+}
+
+.LoginCard-inputs{
+    display: flex;
+    flex-direction: column;
+}
+
+.LoginCard-input{
+    margin-bottom: 20px;
+}
+
+.LoginCard-error{
+    margin-bottom: 20px;
+    color: #FF0000;
+}

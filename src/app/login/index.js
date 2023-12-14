@@ -1,4 +1,4 @@
-import {memo, useCallback} from 'react';
+import {memo, useCallback, useEffect, useState} from 'react';
 import useStore from "../../hooks/use-store";
 import useTranslate from "../../hooks/use-translate";
 import useInit from "../../hooks/use-init";
@@ -8,32 +8,42 @@ import Head from "../../components/head";
 import CatalogFilter from "../../containers/catalog-filter";
 import CatalogList from "../../containers/catalog-list";
 import LocaleSelect from "../../containers/locale-select";
+import LoginCard from '../../components/login-card';
 import useSelector from '../../hooks/use-selector';
+import { useNavigate } from 'react-router';
 import UserShort from '../../components/user-short';
-
 
 /**
  * Главная страница - первичная загрузка каталога
  */
-function Main() {
+function Login() {
 
   const store = useStore();
+  const navigate = useNavigate()
 
   useInit(() => {
-    store.actions.catalog.initParams();
     store.actions.login.checkAuth();
   }, [], true);
 
   const select = useSelector(state => ({
     isAuth: state.login.isAuth,
+    error: state.login.error,
     name: state.login.name,
+
   }))
-  
+
   const callbacks = {
+    login: useCallback((login, password) => store.actions.login.login({login, password}), [store]),
     logout: useCallback(() => store.actions.login.logout(), [store])
   }
-
   const {t} = useTranslate();
+
+  useEffect(() => {
+    if(select.isAuth){
+      navigate('/profile')
+    }
+  }, [select.isAuth])
+  
 
   return (
     <PageLayout>
@@ -42,10 +52,9 @@ function Main() {
         <LocaleSelect/>
       </Head>
       <Navigation/>
-      <CatalogFilter/>
-      <CatalogList/>
+      <LoginCard  isAuth={select.isAuth} error={select.error} login={callbacks.login}/>
     </PageLayout>
   );
 }
 
-export default memo(Main);
+export default memo(Login);

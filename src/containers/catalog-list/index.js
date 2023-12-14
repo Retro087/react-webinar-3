@@ -19,6 +19,7 @@ function CatalogList() {
     limit: state.catalog.params.limit,
     count: state.catalog.count,
     waiting: state.catalog.waiting,
+    params: state.catalog.params
   }));
 
   const callbacks = {
@@ -31,10 +32,11 @@ function CatalogList() {
       return `?${new URLSearchParams({
         page,
         limit: select.limit,
-        sort: select.sort,
-        query: select.query
+        sort: select.params.sort,
+        query: select.params.query,
+        category: select.params.category
       })}`;
-    }, [select.limit, select.sort, select.query])
+    }, [select.limit, select.params.sort, select.params.query, select.params.category])
   }
 
   const {t} = useTranslate();
