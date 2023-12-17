@@ -6,6 +6,9 @@ import Basket from "./basket";
 import Article from "./article";
 import Login from './login';
 import Profile from './profile';
+import useStore from '../hooks/use-store';
+import useInit from '../hooks/use-init';
+import { CheckAuth } from './check-auth';
 
 /**
  * Приложение
@@ -13,7 +16,13 @@ import Profile from './profile';
  */
 function App() {
 
+  const store = useStore()
+  
   const activeModal = useSelector(state => state.modals.name);
+
+  useInit(() => {
+    store.actions.login.checkAuth();
+  }, [], true);
 
   return (
     <>
@@ -21,9 +30,8 @@ function App() {
         <Route path={''} element={<Main/>}/>
         <Route path={'/articles/:id'} element={<Article/>}/>
         <Route path={'/login'} element={<Login/>}/>
-        <Route path={'/profile'} element={<Profile />}/>
+        <Route path={'/profile'} element={<CheckAuth><Profile /></CheckAuth>}/>
       </Routes>
-
       {activeModal === 'basket' && <Basket/>}
     </>
   );

@@ -12,25 +12,27 @@ function LoginCard(props) {
       setLogin('')
       setPassword('')
     }
-
   const cn = bem('LoginCard');
   return (
     <div className={cn()}>
-        <h1>Вход</h1>
+        <h1 className={cn('title')}>Вход</h1>
         <div className={cn('input')}>
-            <span>Логин</span>
+            <span className={cn('label')}>Логин</span>
             <div>
-              <input onChange={(e) => setLogin(e.target.value)} value={login}/>
+              <input className="input" onChange={(e) => setLogin(e.target.value)} value={login}/>
             </div>
         </div>
         <div className={cn('input')}>
-            <span>Пароль</span>
+            <span className={cn('label')}>Пароль</span>
             <div>
-              <input onChange={(e) => setPassword(e.target.value)} value={password}/>
+              <input className="input" type="password" onChange={(e) => setPassword(e.target.value)} value={password}/>
             </div>
         </div>
-        {props.error ? 
-        <div className={cn('error')}>{props.error}</div> : ''}
+        {props.errors ? 
+        props.errors.map(item => {
+          return <div className={cn('error')}>{item}</div>
+        })
+         : ''}
         <button onClick={() => onClick()}>Войти</button>
     </div>
   )

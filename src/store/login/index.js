@@ -14,10 +14,10 @@ class LoginState extends StoreModule {
   initState() {
     return {
       name: '',
-      error: '',
+      errors: [],
       X_token: '',
-      isAuth: false,
-      user: {}
+      isAuth: null,
+      waiting: false
     }
   }
 
@@ -29,11 +29,12 @@ class LoginState extends StoreModule {
         headers: {'Content-Type': 'application/json'}
     })
     const json = await response.json()
-    debugger
     if(json.error){
         this.setState({
             ...this.getState(),
-            error: json.error.message
+            errors: json.error.data.issues.map(item => {
+              return item.message
+            })
         })
     }else{
         localStorage.setItem('x-token', json.result.token);
@@ -64,6 +65,7 @@ class LoginState extends StoreModule {
         this.setState({
             ...this.getState(),
             ...this.initState(),
+            isAuth: false,
             error: json.error.message
         })
     }else{
@@ -71,15 +73,25 @@ class LoginState extends StoreModule {
       localStorage.removeItem('x-token')
         this.setState({ 
             ...this.getState(),
-            ...this.initState()
+            isAuth: false
         })
     }
     
   }
 
+  resetErrors(){
+    this.setState({
+      ...this.getState(),
+      errors: []
+    })
+  }
+
   async checkAuth() {
     const token = localStorage.getItem('x-token');
-    
+    this.setState({
+      ...this.getState(),
+      waiting: true
+    })
     if (!token) {
       this.setState({
         ...this.getState(),
@@ -99,18 +111,17 @@ class LoginState extends StoreModule {
       if (json.error) {
         this.setState({
           ...this.getState(),
-          user: {},
           isAuth: false,
-          error: json.error.message
+          errors: json.error.message,
+          waiting: false
         }, )
       }
       else{
         this.setState({
           ...this.getState(),
-          user: json.result,
           isAuth: true,
-          error: '',
-          name: json.result.profile.name
+          name: json.result.profile.name,
+          waiting: false
         })
       }
     }

@@ -21,15 +21,10 @@ function Login() {
   const store = useStore();
   const navigate = useNavigate()
 
-  useInit(() => {
-    store.actions.login.checkAuth();
-  }, [], true);
-
   const select = useSelector(state => ({
     isAuth: state.login.isAuth,
-    error: state.login.error,
+    errors: state.login.errors,
     name: state.login.name,
-
   }))
 
   const callbacks = {
@@ -42,6 +37,7 @@ function Login() {
     if(select.isAuth){
       navigate('/profile')
     }
+    store.actions.login.resetErrors()
   }, [select.isAuth])
   
 
@@ -52,7 +48,7 @@ function Login() {
         <LocaleSelect/>
       </Head>
       <Navigation/>
-      <LoginCard  isAuth={select.isAuth} error={select.error} login={callbacks.login}/>
+      <LoginCard isAuth={select.isAuth} errors={select.errors} login={callbacks.login}/>
     </PageLayout>
   );
 }

@@ -23,7 +23,6 @@ function Article() {
 
   useInit(() => {
     store.actions.article.load(params.id);
-    store.actions.login.checkAuth();
   }, [params.id]);
 
   const select = useSelector(state => ({

@@ -21,7 +21,6 @@ function Main() {
 
   useInit(() => {
     store.actions.catalog.initParams();
-    store.actions.login.checkAuth();
   }, [], true);
 
   const select = useSelector(state => ({

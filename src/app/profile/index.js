@@ -13,6 +13,7 @@ import useSelector from '../../hooks/use-selector';
 import { useNavigate } from 'react-router';
 import UserShort from '../../components/user-short';
 import ProfileCard from '../../components/profile-card';
+import Spinner from '../../components/spinner';
 
 /**
  * Главная страница - первичная загрузка каталога
@@ -22,15 +23,11 @@ function Profile() {
   const store = useStore();
   const navigate = useNavigate()
 
-  useInit(() => {
-    store.actions.login.checkAuth();
-  }, [], true);
-
   const select = useSelector(state => ({
     isAuth: state.login.isAuth,
-    error: state.login.error,
-    name: state.login.name,
-    user: state.login.user
+    name: state.profile.name,
+    user: state.profile.user,
+    waiting: state.login.waiting
   }))
 
   const callbacks = {
@@ -40,10 +37,8 @@ function Profile() {
   const {t} = useTranslate();
   
   useEffect(() => {
-    if(!select.isAuth){
-      navigate('/login')
-    }
-  }, [select.isAuth])
+    store.actions.profile.getUser()
+  }, [])
 
   return (
     <PageLayout>
@@ -52,7 +47,9 @@ function Profile() {
         <LocaleSelect/>
       </Head>
       <Navigation/>
-      <ProfileCard user={select.user} name={select.name}/>
+      <Spinner active={select.waiting}>
+        <ProfileCard user={select.user} name={select.name}/>
+      </Spinner>
     </PageLayout>
   );
 }

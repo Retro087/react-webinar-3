@@ -1,3 +1,13 @@
 .ProfileCard{
-  padding-left: 20px;
+  padding: 20px;
+}
+
+.ProfileCard-title{
+  font-weight: 700;
+  font-size: 24px;
+  padding-bottom: 20px;
+}
+
+.ProfileCard-item{
+  font-size: 18px;
 }

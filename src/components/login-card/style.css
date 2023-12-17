@@ -1,10 +1,5 @@
 .LoginCard{
-    padding: 0 20px;
-}
-
-.LoginCard-inputs{
-    display: flex;
-    flex-direction: column;
+    padding: 20px;
 }
 
 .LoginCard-input{
@@ -14,4 +9,17 @@
 .LoginCard-error{
     margin-bottom: 20px;
     color: #FF0000;
+}
+
+.LoginCard-title{
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.LoginCard-label{
+    font-size: 16px;
+}
+
+.input{
+    font-size: 16px;
 }

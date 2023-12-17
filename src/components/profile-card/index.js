@@ -12,10 +12,10 @@ function ProfileCard(props) {
 
   return (
     <div className={cn()}>
-        <h1>Профиль</h1>
-        <p>Имя: <b>{props.name}</b></p>
-        <p>Телефон: <b>{props.user.profile.phone}</b></p>
-        <p>email: <b>{props.user.email}</b></p>
+        <h1 className={cn('title')}>Профиль</h1>
+        <p className={cn('item')}>Имя: <b>{props.name}</b></p>
+        <p className={cn('item')}>Телефон: <b>{props.user.profile.phone}</b></p>
+        <p className={cn('item')}>email: <b>{props.user.email}</b></p>
     </div>
   )
 }

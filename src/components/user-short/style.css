@@ -9,4 +9,10 @@
   text-align: end;
   vertical-align: middle;
   padding: 0 20px;
+  border-bottom: 1px solid #DCDCDC;
+}
+
+.link{
+  color: #0087E9;
+  font-size: 13px
 }

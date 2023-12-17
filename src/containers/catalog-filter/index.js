@@ -17,12 +17,12 @@ function CatalogFilter() {
   const select = useSelector(state => ({
     sort: state.catalog.params.sort,
     query: state.catalog.params.query,
-    categories: state.catalog.categories,
+    categories: state.categories.categories,
     category: state.catalog.params.category
   }));
   
   useEffect(() => {
-    store.actions.catalog.getCategories()
+    store.actions.categories.getCategories()
   }, [])
 
   const callbacks = {
