@@ -1,0 +1,37 @@
+.ItemComment-head{
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.ItemComment-author{
+    margin-right: 10px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.ItemComment-date{
+    font-size: 12px;
+    color: #666666;
+}
+
+.ItemComment-text{
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+.ItemComment{
+    margin-bottom: 20px;
+    word-wrap: break-word;
+}
+
+.ItemComment-link{
+    font-size: 12px;
+    color: #0087E9;
+    text-decoration: none;
+}
+
+.ItemComment-me{
+    margin-right: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #666666;
+}

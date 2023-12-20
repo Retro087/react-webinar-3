@@ -31,3 +31,8 @@
 .SideLayout-item {
   margin: 0 5px;
 }
+
+.SideLayout_padding_big {
+  padding: 40px;
+  display: block;
+}
