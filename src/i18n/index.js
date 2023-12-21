@@ -34,7 +34,6 @@ class I18nService {
       
     setLang(lang) {
       this.lang = lang
-      this.services.api.setHeader('X-Lang', lang)
       this.notify()
     }
 

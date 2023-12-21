@@ -21,7 +21,7 @@ function Main() {
       store.actions.categories.load()
     ]);
   }, [lang], true);
-  debugger
+  
   return (
     <PageLayout>
       <TopHead/>
