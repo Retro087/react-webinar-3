@@ -1,3 +1,8 @@
 .CommentsCard-title{
     font-size: 24px;
+    padding-bottom: 20px;
+}
+
+.CommentsCard{
+    padding-bottom: 50px;
 }

@@ -21,7 +21,7 @@ function ItemComment(props) {
 
   function closeComment(){
     props.setIsOpen(true)
-    props.setOpenedId('')
+    props.setOpenedId({})
   }
   
   return (
@@ -39,7 +39,7 @@ function ItemComment(props) {
         <div className={cn('text')}>{props.item.text}</div>
         <a onClick={(e) => openComment(e)} className={cn('link')} href=''>Ответить</a>
       </div>
-      {props.lastChild?._id === props.item._id ? <CommentForm id={props.openedId._id} level={props.openedId.level} closeComment={closeComment} isOpen={props.isOpen} setIsOpen={props.setIsOpen} isAuth={props.isAuth} addComment={props.addComment} placehold={'Мой ответ для User №1'} title={'Новый ответ'}/> : ''}
+      {props.lastChild?._id === props.item._id ? <CommentForm onSignIn={props.onSignIn} id={props.openedId._id} level={props.openedId.level} closeComment={closeComment} isOpen={props.isOpen} setIsOpen={props.setIsOpen} isAuth={props.isAuth} addComment={props.addComment} placehold={'Мой ответ для User №1'} title={'Новый ответ'}/> : ''}
     </div>
   )
 }

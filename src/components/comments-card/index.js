@@ -14,17 +14,17 @@ function CommentsCard(props) {
     <div className={cn()}>
         <h1 className={cn('title')}>Комментарии ({props.count})</h1>
         {props.comments.map((item) => {
-          return <ItemComment lastChild={props.lastChild} setOpenedId={props.setOpenedId} openedId={props.openedId} isOpen={props.isOpen} setIsOpen={props.setIsOpen} addComment={props.addComment} isAuth={props.isAuth} signedId={props.signedId} key={item._id} item={item}/>
+          return <ItemComment onSignIn={props.onSignIn} lastChild={props.lastChild} setOpenedId={props.setOpenedId} openedId={props.openedId} isOpen={props.isOpen} setIsOpen={props.setIsOpen} addComment={props.addComment} isAuth={props.isAuth} signedId={props.signedId} key={item._id} item={item}/>
         })}
-        {props.isOpen ? <CommentForm isOpen={props.isOpen} isAuth={props.isAuth} title={'Новый комментарий'} addComment={props.addComment} placehold={'Текст'}/> : ''}
+        {props.isOpen ? <CommentForm onSignIn={props.onSignIn} isOpen={props.isOpen} isAuth={props.isAuth} title={'Новый комментарий'} addComment={props.addComment} placehold={'Текст'}/> : ''}
     </div>
   );
 }
-  
+
 CommentsCard.propTypes = {
   Comments: PropTypes.array,
   setOpenedId: PropTypes.func,
-  openedId: PropTypes.array,
+  openedId: PropTypes.object,
   isAuth: PropTypes.bool,
   addComment: PropTypes.func,
   isOpen: PropTypes.bool,
