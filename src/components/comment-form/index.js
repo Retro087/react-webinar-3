@@ -31,7 +31,9 @@ function CommentForm(props) {
   }
 
   useEffect(() => {
-    commentForm.current?.scrollIntoView({block: 'center'})
+    if(!props.isOpen){
+      commentForm.current?.scrollIntoView({block: 'center'})
+    }
   }, [])
 
   if(!props.isAuth){
